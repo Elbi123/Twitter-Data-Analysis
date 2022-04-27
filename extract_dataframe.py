@@ -1,3 +1,4 @@
+from cmath import nan
 import json
 import pandas as pd
 from textblob import TextBlob
@@ -111,14 +112,14 @@ class TweetDfExtractor:
 
     # done
     def is_sensitive(self) -> list:
+        print(self.tweets_list.columns)
         try:
-            is_sensitive = [x for x in self.tweets_list['possibly_sensitive']]
+            is_sensitive = [x for x in self.tweets_list["possibly_sensitive"]]
         except KeyError:
             is_sensitive = None
 
         return is_sensitive
 
-    # done
     def find_favourite_count(self) -> list:
         try:
             favorite_count = [
@@ -233,8 +234,10 @@ if __name__ == "__main__":
     cleaner.convert_to_datetime(df_after_drop_duplicate)
     cleaner.convert_to_numbers()
     cleaner.remove_non_english_tweets()
-    tweet_df = cleaner.return_df()
-    tweet = TweetDfExtractor(tweet_df)
-    tweet.get_tweet_df(True)
+    tweet_df = cleaner.return_df().head(5)
+    tweet = TweetDfExtractor(wanted_df.head(5))
+    print(wanted_df.head(5).columns)
+    text = tweet.find_full_text()
+    print(tweet.is_sensitive())
 
     # use all defined functions to generate a dataframe with the specified columns above
