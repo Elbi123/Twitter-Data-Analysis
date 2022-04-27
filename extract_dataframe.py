@@ -236,8 +236,5 @@ if __name__ == "__main__":
     cleaner.remove_non_english_tweets()
     tweet_df = cleaner.return_df().head(5)
     tweet = TweetDfExtractor(wanted_df.head(5))
-    print(wanted_df.head(5).columns)
-    text = tweet.find_full_text()
-    print(tweet.is_sensitive())
-
+    tweet.get_tweet_df(True)
     # use all defined functions to generate a dataframe with the specified columns above
